@@ -2,6 +2,7 @@ package br.com.agls.expensesauthapi.config.security;
 
 import br.com.agls.expensesauthapi.domain.entity.user.User;
 import br.com.agls.expensesauthapi.domain.exceptions.GenerateTokenException;
+import br.com.agls.expensesauthapi.domain.exceptions.InvalidJWTException;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
@@ -49,12 +50,13 @@ public class TokenService {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm).withIssuer("app-name").build().verify(token).getSubject();
         } catch (JWTVerificationException e) {
-            return "";
+            LOGGER.error("Invalid token. Error: {}", e.getMessage());
+            throw new InvalidJWTException(e.getMessage());
         }
     }
 
     private Map<String, ?> generatePayload(User user) {
-        return Map.of("userId", user.getId(), "role", user.getRole().getRole());
+        return Map.of("userId", user.getId().toString(), "role", user.getRole().toString());
     }
 
     private Instant generateExpirationDate() {
