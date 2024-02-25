@@ -1,4 +1,8 @@
 server:
   port: 9091
   servlet:
-    context-path: /expenses-auh-api
+    context-path: /expenses-auth-api
+
+spring:
+  application:
+    name: expense-auth-service-api
