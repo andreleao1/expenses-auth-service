@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/expenses-auth
+    username: postgres
+    password: password
+    driver-class-name: org.postgresql.Driver
+
+api:
+  jwt:
+    secret: ${JWT_SECRET:secret}
+    expiration-time: ${JWT_EXPIRATION:60}
