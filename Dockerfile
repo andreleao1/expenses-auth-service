@@ -6,7 +6,7 @@ COPY src ./src
 RUN mvn package -DskipTests
 
 # Stage 2: Run the application
-FROM adoptopenjdk:17-jre-hotspot
+FROM eclipse-temurin:17-alpine
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 EXPOSE 9090:9090
