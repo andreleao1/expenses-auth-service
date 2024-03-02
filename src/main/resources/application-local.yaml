@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:${DB_PORT:5432}/expenses-auth
+    url: jdbc:postgresql://localhost:${DB_PORT:5432}/expenses-control
     username: postgres
     password: password
     driver-class-name: org.postgresql.Driver
